@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /* 全局禁止文字选中 */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .main {
+            overflow: hidden;
+            width: 400px;
+            height: 700px;
+            margin: 20px auto;
+            background: url(./imgs/背景.png) no-repeat;
+            background-size: 400px 700px;
+            position: relative;
+        }
+
+        .big_stop {
+            display: none;
+            top: 0;
+            z-index: 10;
+            width: 400px;
+            height: 700px;
+            margin: 0px auto;
+            position: absolute;
+            background-color: rgba(54, 52, 52, 0.5);
+        }
+
+        .main img {
+            width: 50px;
+        }
+
+        .num,
+        .grades {
+            margin-top: 10px;
+            position: relative;
+            width: 200px;
+            height: 15px;
+            color: white;
+            font-size: 15px;
+        }
+
+        .stop,
+        .history {
+            cursor: pointer;
+            text-align: center;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            border: 1px solid white;
+            position: absolute;
+            right: 10px;
+            top: 0;
+            margin: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn0 {
+            cursor: pointer;
+            margin-top: 20px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .history {
+            width: 120px;
+            right: 50px;
+            border-radius: 20px;
+        }
+
+        .big_history {
+            display: none;
+            top: 0;
+            z-index: 10;
+            width: 400px;
+            height: 700px;
+            margin: 0px auto;
+            position: absolute;
+            background-color: rgba(57, 52, 52, 0.5);
+        }
+        .historys{
+            width: 100%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            position: absolute;
+        }
+        .historys p{
+            text-align: center;
+            font-size: 30px;
+            color: white;
+        }
+        .historys p button{
+            outline-color: transparent;
+            font-weight: bold;
+            color: blue;
+            cursor: pointer;
+            width: 100px;
+            height: 30px;
+            border-radius: 15px;
+            border-color: transparent;
+            background-image: linear-gradient( 135deg, #FFE985 10%, #FA742B 100%);
+        }
+        .start-game{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(54, 52, 52, 0.5);
+        }
+        .start-game button{
+            color: white;
+            background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+            cursor: pointer;
+            border: none;
+            outline: none;
+            width: 150px;
+            height: 30px;
+            font-size: 20px;
+            border-radius: 10px;
+        }
+        .start-game button:hover{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="num">
+            击杀数量：0
+        </div>
+        <div class="grades">
+            总 积 分：0
+        </div>
+        <div class="start-game">
+            <button class="start">开始游戏</button>
+        </div>
+        <div class="big_stop">
+            <div class="center">
+                <a href="#"><button class="btn0 btn">新的游戏</button></a>
+                <button class="btn0 btn1">继续游戏</button>
+            </div>
+        </div>
+        <div class="stop">
+            | |
+        </div>
+        <div class="history">
+            历史记录
+        </div>
+        <div class="big_history">
+            <div class="historys">
+                <p>历史最高记录为</p>
+                <p class="history-num">0</p>
+                <p><button class="clear">清楚历史记录</button></p>
+                <p><button class="back">返回继续游戏</button></p>
+            </div>
+        </div>
+    </div>
+    <script src="./game.js"></script>
+</body>
+
+</html>
