@@ -227,10 +227,22 @@ window.onload = function () {
 
 
         // 首次打开时调用本地存储的历史记录渲染页面
-        if (localStorage.getItem('history') != null) {
-            history_num.innerText = localStorage.getItem('history');
+        // if (localStorage.getItem('history') != null) {
+        //     history_num.innerText = localStorage.getItem('history');
+        // }
+        let cookies = document.cookie;
+        if (cookies.indexOf('nums') != -1) {
+            let cookie = document.cookie.split(';');
+            for (let i = 0; i < cookie.length; i++) {
+                if (cookie[i].indexOf('nums') != -1) {
+                    let Num = cookie[i].split('=')[1] * 1;
+                    history_num.innerText = Num;
+                }
+            }
         }
-        // 
+        // 创建cookie 保存时长
+        let d = new Date();
+        d.setTime(d.getTime() + (10 * 24 * 60 * 60 * 1000));
         history.onclick = function () {
             big_history.style.display = 'block';
             if (flag) {
@@ -269,17 +281,40 @@ window.onload = function () {
                         nums.innerText = `击杀数量：${num}`
                         grades.innerText = `总 积 分：${num * 5}`
                         //判断本地存储的历史记录是否为空
-                        if (localStorage.getItem('history') != null) {
-                            // 判断本地存储的历史记录是否大于当前的分数
-                            // 小于当前分数时替换本地存储
-                            if (parseInt(localStorage.getItem('history')) < num * 5) {
-                                localStorage.setItem('history', num * 5)
-                                history_num.innerText = num * 5;
+                        let cookies = document.cookie;
+                        if (cookies.indexOf('nums') != -1) {
+                            let cookie = document.cookie.split(';');
+                            for (let i = 0; i < cookie.length; i++) {
+                                console.log(cookie[i].indexOf('nums'));
+                                if (cookie[i].indexOf('nums') != -1) {
+                                    // 判断本地存储的历史记录是否大于当前的分数
+                                    // 小于当前分数时替换本地存储
+                                    let Num = cookie[i].split('=')[1] * 1;
+                                    console.log(Num, num * 5);
+                                    if (Num < num * 5) {
+                                        document.cookie = `nums=${num * 5};expires=${d.toGMTString()}`
+                                        history_num.innerText = num * 5;
+                                    }
+                                }
                             }
                         } else {
-                            // 为空的话进行第一次存储记录
-                            localStorage.setItem('history', num * 5)
+                            document.cookie = `nums = ${num * 5};expires=${d.toGMTString()}`;
                         }
+
+
+
+                        // if (localStorage.getItem('history') != null) {
+                        //     // 判断本地存储的历史记录是否大于当前的分数
+                        //     // 小于当前分数时替换本地存储
+                        //     if (parseInt(localStorage.getItem('history')) < num * 5) {
+                        //         localStorage.setItem('history', num * 5)
+                        //         history_num.innerText = num * 5;
+                        //     }
+                        // } else {
+                        //     // 为空的话进行第一次存储记录
+                        //     localStorage.setItem('history', num * 5)
+                        // }
+
                         arr[j].remove()
                         arr.splice(j, 1)
                         main.removeChild(SmallPlanArr[i].imgNode);
@@ -288,9 +323,22 @@ window.onload = function () {
                 }
             }
         }
+        //CooKie
+        // function CooKie() {
+        //     let cookie = document.cookie.split(';');
+        //     for (let i = 0; i < cookie.length; i++) {
+        //         if (cookie[i].indexOf('nums') != -1) {
+        //             console.log(cookie[i].split('=')[1]);
+        //             console.log(11);
+        //             history_num.innerText=cookie[i].split('=')[1]
+        //         }
+
+        //     }
+        // }
+        // CooKie()
         // 清楚历史记录
         btn_clear.onclick = function () {
-            localStorage.removeItem('history')
+            document.cookie = 'nums=0'
             history_num.innerText = 0;
         }
 
